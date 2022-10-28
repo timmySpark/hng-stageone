@@ -30,9 +30,6 @@ DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 
-
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,9 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # my Installed Apps
+    'corsheaders',
     'api',
     'rest_framework',
-    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +57,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS: True
 
 ROOT_URLCONF = 'stageone.urls'
 
