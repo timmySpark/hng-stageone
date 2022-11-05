@@ -14,12 +14,13 @@ import json
 from rest_framework import serializers
 
 
+
 # API KEY
 
+OPENAI_API_KEY = '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'
+openai.api_key=OPENAI_API_KEY  
 
-# openai.api_key=OPENAI_API_KEY  
-
-openai.api_key = os.environ.get("OPENAI_API_KEY")
+# openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 # Create your views here.
 
@@ -32,7 +33,14 @@ def bio_list(request):
 def toString(s):  
     str1 = " "
     return (str1.join(s))
-       
+
+def get_key(val, operations):
+    for key,value in operations.items():
+        if val==value:
+            print(key)
+            return key
+
+
 
 class Solve(GenericAPIView):
     serializer_class = SolveSerializer
@@ -52,14 +60,16 @@ class Solve(GenericAPIView):
             'multiplication': '*',
             'division':'/'
         }    
+        print(type(operations))
         opr = data['operation_type'].lower()
         x = int(data['x'])
         y = int(data['y'])
         real_opr = ""
         result = ""
         if opr in operations:
-            real_opr = operations[opr]
-            result = eval(f'{x}{real_opr}{y}')
+            temp_opr = operations[opr]
+            real_opr = get_key(temp_opr, operations)
+            result = eval(f'{x}{temp_opr}{y}')
         else:
 
             # varieties = "Find Synonyms:\n\n Subtraction | addition |multiplication"
@@ -79,7 +89,8 @@ class Solve(GenericAPIView):
                 for op in operations:
                     if operations[op] == special_op:
                         result = eval(f'{x}{operations[op]}{y}')  
-                        real_opr = operations[op]
+                        temp_opr = operations[op]
+                        real_opr = get_key(temp_opr, operations)
 
         return  JsonResponse({
                     "slackUsername":"timmy-spark",
