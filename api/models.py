@@ -17,3 +17,19 @@ class Bio(models.Model):
         return self.slackUsername
 
 
+class Solve(models.Model):
+    # oper=(
+    #     ('Addition', '+'),
+    #     ('Subtraction', '-'),
+    #     ('Division', '/'),
+    # ) choices=oper, default='Addition'
+    operation_type = models.CharField(max_length=100, )
+    x = models.IntegerField()
+    y = models.IntegerField()
+
+    class Meta:
+        verbose_name =("Solve")
+        verbose_name_plural =("Solve")
+        
+    def __str__(self):
+        return self.operation_type    
