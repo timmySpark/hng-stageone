@@ -38,6 +38,9 @@ class Solve(GenericAPIView):
     serializer_class = SolveSerializer
 
     def post(self,request,*args,**kwargs):
+        header = {
+            "Access-Control-Allow-Origin":"*"
+        }
         data = {
                 "operation_type":self.request.data['operation_type'],
                 "x":self.request.data['x'],
