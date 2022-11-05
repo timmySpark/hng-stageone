@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render
 from .serializers import *
 from .models import Bio
@@ -5,19 +6,19 @@ from django.http import JsonResponse,HttpRequest, HttpResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-import os
 import openai
 
 # API KEY
-OPENAI_API_KEY="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"
-openai.api_key = OPENAI_API_KEY
+
+openai.api_key = os.environ.get("OPENAI_API_KEY")
+
 # Create your views here.
 
 def bio_list(request):
     bios = Bio.objects.get()
     serializer= BioSerializer(bios)
     return Response(serializer.data)
-
+ 
 def listToString(s):
    
     # initialize an empty string
