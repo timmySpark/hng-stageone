@@ -5,9 +5,12 @@ from django.http import JsonResponse,HttpRequest, HttpResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from django.views.decorators.csrf import csrf_exempt
+import os
+import openai
 
-
+# API KEY
+OPENAI_API_KEY="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"
+openai.api_key = OPENAI_API_KEY
 # Create your views here.
 
 def bio_list(request):
@@ -15,9 +18,18 @@ def bio_list(request):
     serializer= BioSerializer(bios)
     return Response(serializer.data)
 
+def listToString(s):
+   
+    # initialize an empty string
+    str1 = " "
+   
+    # return string 
+    return (str1.join(s))
+       
+
 
 @api_view(['GET','POST'])
-def Arith(request):
+def solve(request):
 
     operations = {
         'addition': '+',
@@ -26,12 +38,42 @@ def Arith(request):
     }
 
     data = request.GET
-    opr = data['operation_type'].lower()
+    opr = data['operation_type'].strip().lower()
 
-    real_opr = operations[opr]
+   
     x = int(data['x'])
     y = int(data['y'])
-    result = eval(f'{x}{real_opr}{y}')
+    real_opr = ""
+    result = ""
+
+    if opr in operations:
+        real_opr = operations[opr]
+        result = eval(f'{x}{real_opr}{y}')
+    else:
+# {opr}
+        # varieties = "Find Synonyms:\n\n Subtraction | addition |multiplication"
+        varieties = f'Find Math Operator: \n \n can you please add the following together '
+
+        response = openai.Completion.create(
+        engine="text-davinci-002",
+        prompt=varieties,
+        temperature=0.2,
+        max_tokens=256,
+        top_p=1.0,
+        frequency_penalty=0.0,
+        presence_penalty=0.0
+        )
+        responses = listToString(response['choices'][0]['text'].split(','))
+        for special_op in responses:
+            for op in operations:
+                if operations[op] == special_op:
+                    result = eval(f'{x}{operations[op]}{y}')  
+                    real_opr = operations[op]
+        
+      
+    
+
+
     return  JsonResponse({
                 "slackUsername":"timmy-spark",
                 "result": result,
