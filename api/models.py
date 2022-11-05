@@ -18,11 +18,6 @@ class Bio(models.Model):
 
 
 class Solve(models.Model):
-    # oper=(
-    #     ('Addition', '+'),
-    #     ('Subtraction', '-'),
-    #     ('Division', '/'),
-    # ) choices=oper, default='Addition'
     operation_type = models.CharField(max_length=100, )
     x = models.IntegerField()
     y = models.IntegerField()
