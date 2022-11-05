@@ -9,7 +9,6 @@ import os
 import openai
 
 # API KEY
-OPENAI_API_KEY="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"
 openai.api_key = OPENAI_API_KEY
 # Create your views here.
 
