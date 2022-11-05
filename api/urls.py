@@ -3,5 +3,5 @@ from .views import *
 
 urlpatterns = [
     path('biodata',bio_list),
-    path('arith/',Arith)
+    path('eval/',solve)
 ]
