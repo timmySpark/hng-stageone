@@ -3,6 +3,6 @@ from .views import *
 
 urlpatterns = [
     path('biodata',bio_list),
-    path('eval/',solve),
-    path('solve',SolveApiView.as_view())
+    path('eval/',solve_list),
+    path('solve/',SolveApiView.as_view())
 ]

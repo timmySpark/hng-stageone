@@ -12,10 +12,10 @@ import openai
 import json
 
 # API KEY
-# OPENAI_API_KEY= "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"
+OPENAI_API_KEY= "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"
 
-# openai.api_key=OPENAI_API_KEY
-openai.api_key = os.environ.get("OPENAI_API_KEY")
+openai.api_key=OPENAI_API_KEY  
+# openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 # Create your views here.
 
@@ -24,12 +24,22 @@ def bio_list(request):
     serializer= BioSerializer(bios)
     return Response(serializer.data)
 
+#  Api view 1
+@api_view(['GET','POST'])
+def solve_list(request):
+
+    if request.method == 'POST':
+        serializer = SolveSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_201_CREATED)
+
+
+# Apu view 2
 class SolveApiView(APIView):
 
         def post(self,request,*args,**kwargs):
-            real_opr = ""
-            result = ""
-   
+           
             operations = {
                 'addition': '+',
                 'subtraction': '-',
@@ -73,16 +83,29 @@ def toString(s):
     return (str1.join(s))
        
 
-
-def solve(data):
-
+# Function()
+def solve(request):
+    operations = {
+                'addition': '+',
+                'subtraction': '-',
+                'multiplication': '*',
+                'division':'/'
+            }
    
-
+    if request.GET:
+        data = request.GET
+    else:
+        data = request.data
+    # load = json.dumps(data, indent=4)
+    # print(load)
+    print(data)
+        
     opr = data['operation_type'].strip().lower()
-
     x = int(data['x'])
     y = int(data['y'])
-   
+
+    real_opr = ""
+    result = ""
 
     if opr in operations:
         real_opr = operations[opr]
