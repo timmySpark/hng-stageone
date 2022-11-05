@@ -12,7 +12,7 @@ import openai
 import json
 
 # API KEY
-OPENAI_API_KEY= "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"
+OPENAI_API_KEY= "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"
 
 openai.api_key=OPENAI_API_KEY  
 # openai.api_key = os.environ.get("OPENAI_API_KEY")
