@@ -17,10 +17,10 @@ from rest_framework import serializers
 
 # API KEY
 
-OPENAI_API_KEY = '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'
-openai.api_key=OPENAI_API_KEY  
+# OPENAI_API_KEY = ''
+# openai.api_key=OPENAI_API_KEY  
 
-# openai.api_key = os.environ.get("OPENAI_API_KEY")
+openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 # Create your views here.
 
