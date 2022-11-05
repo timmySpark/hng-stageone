@@ -9,7 +9,7 @@ import os
 import openai
 
 # API KEY
-OPENAI_API_KEY="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"
+OPENAI_API_KEY="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"
 openai.api_key = OPENAI_API_KEY
 # Create your views here.
 
@@ -50,9 +50,9 @@ def solve(request):
         real_opr = operations[opr]
         result = eval(f'{x}{real_opr}{y}')
     else:
-# {opr}
+
         # varieties = "Find Synonyms:\n\n Subtraction | addition |multiplication"
-        varieties = f'Find Math Operator: \n \n can you please add the following together '
+        varieties = f'Find Math Operator: \n \n {opr} '
 
         response = openai.Completion.create(
         engine="text-davinci-002",
