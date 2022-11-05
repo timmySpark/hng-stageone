@@ -7,7 +7,3 @@ class BioSerializer(serializers.ModelSerializer):
         fields = ['slackUsername','backend','age','bio']
 
 
-class ArithSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = arit
-        fields = '__all__'

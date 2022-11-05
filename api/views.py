@@ -15,9 +15,9 @@ def bio_list(request):
     serializer= BioSerializer(bios)
     return Response(serializer.data)
 
+
 @api_view(['GET','POST'])
 def Arith(request):
-
 
     operations = {
         'addition': '+',
@@ -32,43 +32,12 @@ def Arith(request):
     x = int(data['x'])
     y = int(data['y'])
     result = eval(f'{x}{real_opr}{y}')
-    return HttpResponse(result)
+    return  JsonResponse({
+                "slackUsername":"timmy-spark",
+                "result": result,
+                "operation_type":real_opr
+                })
 
 
 
-    # if request.method == 'GET':
-    #     bios = Bio.objects.get()
-    #     serializer= BioSerializer(bios)
-    #     return Response(serializer.data)
-    # if request.method == 'POST':
-    #     serializer= ArithSerializer(data=request.data)
-    #     if serializer.is_valid():
-    #         res = 4
-    #         serializer.save()
    
-    #     return Response(serializer.data,status=status.HTTP_200_OK)
-
-            # res = " "
-    # opr = None
-    # print(here)
-    # # if request.GET:
-    # data = request.data
-    # print(data) 
-    # raise ImportError
-    # x=(int(data['x']))
-    # opr = data['operation_type']
-    # y = int(data['y'])
-    # if opr == "+":
-    #     res = x + y
-    # elif opr == "-":
-    #     res = x-y
-    # elif opr == "/":
-    #     res = x/y
-    # else:
-    #     result = "Invalid"
-    # {
-                # "slackUsername":"timmy-spark",
-                # "result": res,
-                # "operation_type":opr
-                # }
-            

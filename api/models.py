@@ -17,16 +17,3 @@ class Bio(models.Model):
         return self.slackUsername
 
 
-class arit(models.Model):
-    oper=(
-        ('Addition', '+'),
-        ('Subtraction', '-'),
-        ('Division', '/'),
-    )
-    operation_type = models.CharField(max_length=100, choices=oper, default='Addition')
-    x = models.IntegerField()
-    y = models.IntegerField()
-
-    class Meta:
-        verbose_name =("Arit")
-        verbose_name_plural =("Arit")
