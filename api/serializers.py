@@ -7,3 +7,7 @@ class BioSerializer(serializers.ModelSerializer):
         fields = ['slackUsername','backend','age','bio']
 
 
+class SolveSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Solve
+        fields = '__all__'
